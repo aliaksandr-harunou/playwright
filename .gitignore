@@ -2,4 +2,4 @@
 test-results/
 playwright-report/
 tests/example.spec.js
-creds.js
+support/credentials/

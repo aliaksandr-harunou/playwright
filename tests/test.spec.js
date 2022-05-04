@@ -1,9 +1,9 @@
 // example.spec.js
 const { test, expect } = require('@playwright/test');
-const MainPage = require('../pageObjects/mainPage');
-const LoginPage = require('../pageObjects/loginPage');
-const ResultPage = require('../pageObjects/resultPage');
-const creds = require('../creds')
+const MainPage = require('../support/pageObjects/mainPage');
+const LoginPage = require('../support/pageObjects/loginPage');
+const ResultPage = require('../support/pageObjects/resultPage');
+const creds = require('../support/credentials/creds')
 
 test('user is able to log in', async ({ page }) => {  
   const mainPage = new MainPage(page);
@@ -13,8 +13,6 @@ test('user is able to log in', async ({ page }) => {
   await loginPage.typeEmail(creds.login)
   await loginPage.typePassword(creds.password)
   await loginPage.clickSignIn()
-  await page.waitForTimeout(5000)
-
 });
 
 test('search should show results', async ({ page }) => {
@@ -23,6 +21,5 @@ test('search should show results', async ({ page }) => {
   await mainPage.open();
   await mainPage.header.openCart()
   await mainPage.header.search("Бутсы")
-  await page.waitForTimeout(5000)
   await expect(resultPage.category).toContainText('Футбольная экипировка');
 });
